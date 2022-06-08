@@ -4,6 +4,8 @@ from numpy import isnan, nan
 
 
 def feats(df, wm_bool, wi_bool, v_bool, mi_bool):
+    #Apply units based on what the user wants
+
     if wm_bool:
         df["Weight_kilo"] = df["desc_p"].apply(lambda x: detect(x,"kg kilo kgs kilos",-1, False))
         df["Weight_gram"] = df["desc_p"].apply(lambda x: detect(x,"gr grs grams gram",-1, False))
@@ -27,8 +29,10 @@ def feats(df, wm_bool, wi_bool, v_bool, mi_bool):
 
 
     if mi_bool:
+        #apply all diferent patterns of pack info
+
         df["pack_aux_1"] = df["desc_p"].apply(lambda x: packsof_n(x))
-        df["pack_aux_2"] = df["desc_p"].apply(lambda x: detect(x,"pack",-1, True))
+        df["pack_aux_2"] = df["desc_p"].apply(lambda x: detect(x,"pack",-1, True)) #only non special function used here
         df["pack_aux_3"] = df["item_name"].apply(lambda x: parenthesis_pack(x)) 
         df["pack_aux_4"] = df["desc_p"].apply(lambda x: n_packsof_m(x))
         df["pack_aux_5"] = df["desc_p"].apply(lambda x: n_by_m(x))
@@ -53,7 +57,9 @@ def feats(df, wm_bool, wi_bool, v_bool, mi_bool):
                 elif not isnan(df[pack_i].iloc[row]) and n == 2:
                     df["pack_3"].iloc[row] = df[pack_i].iloc[row]
 
-        df.drop(["pack_aux_1","pack_aux_2","pack_aux_3","pack_aux_4","pack_aux_5",], axis=1, inplace=True) #drop aux columns
+        #drop individual pattern columns and drop pack_2 and pack_3 columns if they are empty
+
+        df.drop(["pack_aux_1","pack_aux_2","pack_aux_3","pack_aux_4","pack_aux_5",], axis=1, inplace=True) 
 
         if df["pack_2"].isnull().sum() == len(df):
             df.drop("pack_2", axis=1, inplace=True)

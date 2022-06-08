@@ -15,7 +15,7 @@ from create_feats import feats
 
 import config_file_input
 
-asin_path =config_file_input.asin_path
+asin_path = config_file_input.asin_path
 wi_bool = config_file_input.wi_bool
 wm_bool = config_file_input.wm_bool
 v_bool = config_file_input.v_bool
@@ -47,6 +47,5 @@ asin_list.drop(["desc_p", "num_count"], axis=1, inplace=True)
 
 ##### 5 #####
 
-print(asin_list.info())
 path_aux = "/".join(asin_path.split(sep="/")[:-1]) + "/ASIN_EQ.csv"
 asin_list.to_csv(path_aux, index=False)

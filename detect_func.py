@@ -9,7 +9,7 @@ def detect(desc_procesed, keywords, n, integer):
     desc_p_s = desc_procesed.split()  #Separate description at spaces
     
     aux_kw = " " + ". ".join(keywords.split()) + "."  #duplicate keyword list but with a point at the end of keywords
-    total_kw = keywords + aux_kw
+    total_kw = keywords + aux_kw #oz ounce -> oz oz. ounce ounce.
 
     kw_l = total_kw.lower().split()  #Separate keyword list at spaces
 
