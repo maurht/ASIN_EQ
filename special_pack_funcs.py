@@ -20,7 +20,9 @@ def n_packsof_m(desc):
                 except:
                     return nan
     except:
-        return nan
+        pass
+    
+    return nan
 
 
 def n_by_m(desc):
@@ -38,7 +40,9 @@ def n_by_m(desc):
                 except:
                     return nan
     except:
-        return nan
+        pass
+    
+    return nan
 
 
 def packsof_n(desc):
